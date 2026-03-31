@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aman Kumar — AI & Data Science Leader</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070709;
+    --surface: #0f0f12;
+    --surface2: #16161a;
+    --border: #1e1e24;
+    --border2: #2a2a32;
+    --gold: #b8962e;
+    --gold2: #d4af5a;
+    --gold3: #f0cc7a;
+    --text: #e8e6e0;
+    --muted: #7a7870;
+    --muted2: #5a5850;
+    --serif: 'Cormorant Garamond', serif;
+    --sans: 'Syne', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* GRAIN */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 5vw;
+    background: linear-gradient(to bottom, rgba(7,7,9,0.98) 0%, rgba(7,7,9,0) 100%);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold2);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+
+  .nav-links a:hover { color: var(--gold2); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 5vw 6rem 5vw;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--bg) 0%, transparent 40%);
+    z-index: 2;
+  }
+
+  .hero-right::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--bg) 0%, transparent 30%);
+    z-index: 2;
+  }
+
+  .hero-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: grayscale(20%) contrast(1.05);
+    opacity: 0.85;
+  }
+
+  /* Decorative lines */
+  .hero-vline {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--border2) 30%, var(--border2) 70%, transparent);
+  }
+
+  .hero-vline.l1 { left: 33%; }
+  .hero-vline.l2 { left: 66%; opacity: 0.4; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: rise 0.9s 0.2s ease forwards;
+  }
+
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(4rem, 7vw, 7rem);
+    font-weight: 700;
+    line-height: 0.95;
+    margin-bottom: 0.3rem;
+    opacity: 0;
+    animation: rise 0.9s 0.35s ease forwards;
+  }
+
+  .hero-name .first { display: block; }
+  .hero-name .last {
+    display: block;
+    color: var(--gold2);
+    font-style: italic;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    margin-top: 0.8rem;
+    opacity: 0;
+    animation: rise 0.9s 0.5s ease forwards;
+  }
+
+  .hero-desc {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #9a9890;
+    line-height: 1.85;
+    max-width: 460px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: rise 0.9s 0.65s ease forwards;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: rise 0.9s 0.8s ease forwards;
+  }
+
+  .hstat {
+    border-left: 2px solid var(--gold);
+    padding-left: 1rem;
+  }
+
+  .hstat-num {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--gold2);
+    line-height: 1;
+    display: block;
+  }
+
+  .hstat-label {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-top: 0.3rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    animation: rise 0.9s 0.95s ease forwards;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--bg);
+    font-weight: 500;
+  }
+
+  .btn-gold:hover {
+    background: var(--gold3);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(184,150,46,0.35);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border2);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold2);
+    transform: translateY(-2px);
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 7rem 5vw;
+    border-top: 1px solid var(--border);
+    position: relative;
+  }
+
+  .sec-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 4.5rem;
+  }
+
+  .sec-num {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    flex-shrink: 0;
+  }
+
+  .sec-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .sec-title em { font-style: italic; color: var(--gold2); }
+
+  .sec-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--border2);
+  }
+
+  /* ABOUT */
+  .about-layout {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-body p {
+    font-size: 1.05rem;
+    color: #9a9890;
+    line-height: 1.9;
+    margin-bottom: 1.4rem;
+  }
+
+  .about-body p strong { color: var(--text); font-weight: 600; }
+
+  .about-body p em { color: var(--gold2); font-style: italic; font-family: var(--serif); font-size: 1.1rem; }
+
+  .skills-panel {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    padding: 2rem;
+  }
+
+  .skills-title {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .skill-tag {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    margin: 0.25rem;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+    transition: all 0.25s;
+    cursor: default;
+  }
+
+  .skill-tag:hover {
+    border-color: var(--gold);
+    color: var(--gold2);
+    background: rgba(184,150,46,0.05);
+  }
+
+  .skill-tag.hot {
+    border-color: var(--gold);
+    color: var(--gold2);
+    background: rgba(184,150,46,0.08);
+  }
+
+  /* EXPERIENCE */
+  .exp-timeline { position: relative; }
+
+  .exp-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), var(--border2) 60%, transparent);
+  }
+
+  .exp-item {
+    padding: 0 0 3.5rem 3rem;
+    position: relative;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .exp-item.visible { opacity: 1; transform: translateX(0); }
+
+  .exp-dot {
+    position: absolute;
+    left: -5px;
+    top: 6px;
+    width: 11px;
+    height: 11px;
+    background: var(--gold);
+    border: 2px solid var(--bg);
+    border-radius: 50%;
+  }
+
+  .exp-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .exp-company {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold2);
+  }
+
+  .exp-period {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    color: var(--muted2);
+    letter-spacing: 0.1em;
+  }
+
+  .exp-role {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: var(--text);
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.9rem;
+    color: #888680;
+    padding-left: 1.2rem;
+    position: relative;
+    line-height: 1.7;
+  }
+
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.7rem;
+  }
+
+  /* PROJECT CARDS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .proj-card {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .proj-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--gold);
+    transition: height 0.4s ease;
+  }
+
+  .proj-card:hover { border-color: var(--border2); transform: translateY(-4px); }
+  .proj-card:hover::before { height: 100%; }
+
+  .proj-tag {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .proj-title {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .proj-desc {
+    font-size: 0.88rem;
+    color: #888680;
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+
+  .proj-metric {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--gold2);
+    background: rgba(184,150,46,0.08);
+    border: 1px solid rgba(184,150,46,0.2);
+    padding: 0.3rem 0.8rem;
+    display: inline-block;
+  }
+
+  /* CONTENT / YOUTUBE / UDEMY */
+  .content-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .content-card {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+  }
+
+  .content-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  .content-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .content-platform {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .content-card-title {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+
+  .content-card-desc {
+    font-size: 0.9rem;
+    color: #888680;
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+
+  .content-stats {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .cstat-num {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--gold2);
+    display: block;
+    line-height: 1;
+  }
+
+  .cstat-label {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted2);
+    display: block;
+    margin-top: 0.25rem;
+  }
+
+  .content-sub-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .topic-pill {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    padding: 1.2rem 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: all 0.25s;
+    text-align: center;
+  }
+
+  .topic-pill:hover { border-color: var(--gold); color: var(--gold2); }
+
+  /* CERTS */
+  .certs-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .cert-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    padding: 1rem 1.5rem;
+    transition: border-color 0.25s;
+  }
+
+  .cert-badge:hover { border-color: var(--gold); }
+
+  .cert-icon { font-size: 1.3rem; }
+
+  .cert-name {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  /* CONTACT */
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .contact-lead {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-lead em { font-style: italic; color: var(--gold2); }
+
+  .contact-sub {
+    font-size: 0.95rem;
+    color: #888680;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--gold);
+    transform: translateX(6px);
+  }
+
+  .contact-link-icon {
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .contact-link-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 0.15rem;
+  }
+
+  .contact-link-value {
+    font-size: 0.88rem;
+    color: var(--text);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted2);
+  }
+
+  .footer-brand {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  /* ANIMATIONS */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 50vh; }
+    .hero-right::before { background: linear-gradient(to bottom, var(--bg) 0%, transparent 40%); }
+    .about-layout, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .projects-grid, .content-hero { grid-template-columns: 1fr; }
+    .content-sub-grid { grid-template-columns: repeat(2, 1fr); }
+    nav { padding: 1.2rem 5vw; }
+    .nav-links { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Aman Kumar</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#content">Content</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-vline l1"></div>
+  <div class="hero-vline l2"></div>
+
+  <div class="hero-left">
+    <div class="eyebrow">AI & Data Science Leader · 14+ Years</div>
+    <h1 class="hero-name">
+      <span class="first">Aman</span>
+      <span class="last">Kumar</span>
+    </h1>
+    <p class="hero-title">Senior Data Scientist & AI Educator</p>
+    <p class="hero-desc">
+      Building enterprise AI that actually works — from Agentic AI systems and RAG platforms to GenAI governance frameworks. 
+      Specialised in regulated banking environments, with a parallel mission of making AI accessible to 10M+ learners worldwide.
+    </p>
+
+    <div class="hero-stats">
+      <div class="hstat">
+        <span class="hstat-num">14+</span>
+        <span class="hstat-label">Years Experience</span>
+      </div>
+      <div class="hstat">
+        <span class="hstat-num">10M+</span>
+        <span class="hstat-label">YouTube Views</span>
+      </div>
+      <div class="hstat">
+        <span class="hstat-num">800+</span>
+        <span class="hstat-label">AI Videos</span>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-gold">Get in Touch</a>
+      <a href="#content" class="btn btn-outline">View My Content</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <img 
+      src="Aman_cleaned.png" 
+      alt="Aman Kumar" 
+      class="hero-photo"
+      onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #0f0f12 0%, #1a1a20 100%)';"
+    >
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-header">
+    <span class="sec-num">01</span>
+    <h2 class="sec-title">About <em>Me</em></h2>
+    <div class="sec-rule"></div>
+  </div>
+
+  <div class="about-layout">
+    <div class="about-body">
+      <p>
+        I'm a <strong>Senior Data Scientist and AI Systems Lead</strong> with 14+ years of experience building real AI solutions inside some of the world's most complex regulated environments — including <em>RBS, HSBC, and Infosys</em>.
+      </p>
+      <p>
+        My work sits at the intersection of <strong>Generative AI, Agentic AI, and enterprise governance</strong>. I don't just build models — I build the systems, frameworks, and operating patterns that allow organisations to trust and scale AI safely.
+      </p>
+      <p>
+        Alongside my enterprise career, I founded <strong>Unfold Data Science</strong> — an AI education platform that has reached over <em>10 million views</em> across 800+ videos, with Udemy Business courses adopted by enterprise learners globally. I believe the best practitioners teach, and the best teachers build.
+      </p>
+      <p>
+        I hold <strong>AWS certifications in Machine Learning and AI</strong>, and my technical depth spans Python, LLMs, LangChain, LangGraph, AutoGen, RAG architectures, and production AI deployment in cloud environments.
+      </p>
+    </div>
+
+    <div>
+      <div class="skills-panel">
+        <div class="skills-title">Core Expertise</div>
+        <span class="skill-tag hot">Agentic AI</span>
+        <span class="skill-tag hot">GenAI / LLMs</span>
+        <span class="skill-tag hot">RAG Systems</span>
+        <span class="skill-tag">LangChain</span>
+        <span class="skill-tag">LangGraph</span>
+        <span class="skill-tag">AutoGen</span>
+        <span class="skill-tag">OpenAI</span>
+        <span class="skill-tag">Semantic Kernel</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Machine Learning</span>
+        <span class="skill-tag">NLP</span>
+        <span class="skill-tag">Risk Analytics</span>
+        <span class="skill-tag">AI Governance</span>
+        <span class="skill-tag">AWS</span>
+        <span class="skill-tag">Azure</span>
+        <span class="skill-tag">Snowflake</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Predictive Modelling</span>
+      </div>
+
+      <div style="margin-top: 1rem;">
+        <div class="certs-row">
+          <div class="cert-badge">
+            <span class="cert-icon">☁️</span>
+            <span class="cert-name">AWS Certified ML – Specialty</span>
+          </div>
+          <div class="cert-badge">
+            <span class="cert-icon">🤖</span>
+            <span class="cert-name">AWS Certified AI Practitioner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sec-header">
+    <span class="sec-num">02</span>
+    <h2 class="sec-title">Experience</h2>
+    <div class="sec-rule"></div>
+  </div>
+
+  <div class="exp-timeline">
+
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-meta">
+        <span class="exp-company">Infosys UK · RBS Engagement</span>
+        <span class="exp-period">Oct 2021 – Present</span>
+      </div>
+      <div class="exp-role">Senior Data Scientist — Generative AI & Banking Analytics</div>
+      <ul class="exp-bullets">
+        <li>Developed Generative AI and Agentic AI solutions integrated into enterprise banking workflows</li>
+        <li>Built RAG-based analytics platforms combining structured and unstructured banking data</li>
+        <li>Designed AI governance frameworks, model validation pipelines, and guardrail strategies for regulated deployments</li>
+        <li>Led quantitative analytics and predictive modelling for risk analytics and decision support</li>
+        <li>Mentored data science teams and drove cross-functional AI adoption initiatives</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-meta">
+        <span class="exp-company">HSBC UK</span>
+        <span class="exp-period">Oct 2021 – Oct 2022</span>
+      </div>
+      <div class="exp-role">Senior Data Scientist — AI Governance & Banking</div>
+      <ul class="exp-bullets">
+        <li>Designed and deployed AI-based solutions in a complex regulated banking environment</li>
+        <li>Led enterprise AI governance and model risk alignment across product teams</li>
+        <li>Drove AI adoption initiatives with structured enablement patterns under compliance constraints</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-meta">
+        <span class="exp-company">Infosys Limited · India</span>
+        <span class="exp-period">Oct 2014 – Aug 2020</span>
+      </div>
+      <div class="exp-role">Lead Analyst — Data Science</div>
+      <ul class="exp-bullets">
+        <li>Built predictive models for risk scoring, anomaly detection, and customer analytics</li>
+        <li>Applied statistical modelling and ML techniques on large-scale banking datasets</li>
+        <li>Delivered end-to-end data science pipelines from data ingestion to production deployment</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-meta">
+        <span class="exp-company">Capgemini</span>
+        <span class="exp-period">Oct 2012 – Oct 2014</span>
+      </div>
+      <div class="exp-role">Senior Software Engineer</div>
+      <ul class="exp-bullets">
+        <li>Delivered enterprise software engineering solutions across client engagements</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-header">
+    <span class="sec-num">03</span>
+    <h2 class="sec-title">Selected <em>Projects</em></h2>
+    <div class="sec-rule"></div>
+  </div>
+
+  <div class="projects-grid">
+    <div class="proj-card">
+      <span class="proj-tag">Agentic AI · Banking</span>
+      <div class="proj-title">AI Complaint Investigation System</div>
+      <p class="proj-desc">
+        Enterprise-grade multi-agent AI system for automated complaint investigation. Built on RAG architecture with structured knowledge retrieval, enabling intelligent routing, evidence gathering, and decision support across complex regulatory workflows.
+      </p>
+      <span class="proj-metric">↓ 40% Manual Effort Reduction</span>
+    </div>
+
+    <div class="proj-card">
+      <span class="proj-tag">GenAI · Operations</span>
+      <div class="proj-title">GenAI Incident Routing System</div>
+      <p class="proj-desc">
+        AI-driven knowledge classification system that intelligently routes incidents to the correct resolution teams. Leverages LLMs for semantic understanding of unstructured incident descriptions, with confidence scoring and audit trails.
+      </p>
+      <span class="proj-metric">↑ 30% Routing Accuracy Improvement</span>
+    </div>
+
+    <div class="proj-card">
+      <span class="proj-tag">RAG · Decision Support</span>
+      <div class="proj-title">Enterprise Knowledge Retrieval Platform</div>
+      <p class="proj-desc">
+        Built a production RAG system integrating structured and unstructured banking data sources, enabling analysts to query institutional knowledge conversationally with cited, auditable responses.
+      </p>
+      <span class="proj-metric">LangChain · LangGraph · Azure OpenAI</span>
+    </div>
+
+    <div class="proj-card">
+      <span class="proj-tag">AI Governance · SDLC</span>
+      <div class="proj-title">GenAI SDLC Integration Framework</div>
+      <p class="proj-desc">
+        Designed enterprise frameworks for safely embedding GenAI into software delivery lifecycles — including evaluation standards, productivity metrics, usage guardrails, and operating rhythms that turn AI from experimentation into structural advantage.
+      </p>
+      <span class="proj-metric">Deployed across Engineering Teams</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section id="content">
+  <div class="sec-header">
+    <span class="sec-num">04</span>
+    <h2 class="sec-title">Content & <em>Education</em></h2>
+    <div class="sec-rule"></div>
+  </div>
+
+  <div class="content-hero">
+    <a class="content-card" href="https://www.youtube.com/@UnfoldDataScience" target="_blank">
+      <span class="content-card-icon">▶</span>
+      <span class="content-platform">YouTube Channel</span>
+      <div class="content-card-title">Unfold Data Science</div>
+      <p class="content-card-desc">
+        India's leading practical AI & Data Science channel. Tutorials on enterprise AI, Agentic AI systems, LLMs, RAG, and real-world ML — built for practitioners, not just beginners.
+      </p>
+      <div class="content-stats">
+        <div>
+          <span class="cstat-num">10M+</span>
+          <span class="cstat-label">Total Views</span>
+        </div>
+        <div>
+          <span class="cstat-num">800+</span>
+          <span class="cstat-label">Videos</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="content-card" href="https://www.udemy.com/user/aman-kumar-900/" target="_blank">
+      <span class="content-card-icon">🎓</span>
+      <span class="content-platform">Udemy · Udemy Business</span>
+      <div class="content-card-title">Enterprise AI Courses</div>
+      <p class="content-card-desc">
+        Comprehensive courses on Agentic AI, Generative AI, and enterprise AI adoption — adopted by Udemy Business and used by learners across global organisations.
+      </p>
+      <div class="content-stats">
+        <div>
+          <span class="cstat-num">✓</span>
+          <span class="cstat-label">Udemy Business</span>
+        </div>
+        <div>
+          <span class="cstat-num">Global</span>
+          <span class="cstat-label">Reach</span>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="content-sub-grid">
+    <div class="topic-pill">Agentic AI Systems</div>
+    <div class="topic-pill">Generative AI & LLMs</div>
+    <div class="topic-pill">RAG Architectures</div>
+    <div class="topic-pill">LangChain & LangGraph</div>
+    <div class="topic-pill">AI Governance</div>
+    <div class="topic-pill">Enterprise ML</div>
+    <div class="topic-pill">Python for AI</div>
+    <div class="topic-pill">Banking & Risk Analytics</div>
+    <div class="topic-pill">AI in Production</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-header">
+    <span class="sec-num">05</span>
+    <h2 class="sec-title">Let's <em>Connect</em></h2>
+    <div class="sec-rule"></div>
+  </div>
+
+  <div class="contact-layout">
+    <div>
+      <div class="contact-lead">
+        Open to senior AI leadership opportunities in <em>India</em>
+      </div>
+      <p class="contact-sub">
+        Currently based in the UK, relocating to India in mid-2026. Actively exploring Head of AI, Principal Data Scientist, and AI Strategy roles — particularly in BFSI and product-led organisations.
+      </p>
+      <a href="mailto:amanrai77@gmail.com" class="btn btn-gold">Send me an email</a>
+    </div>
+
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:amanrai77@gmail.com">
+        <span class="contact-link-icon">✉</span>
+        <div>
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-value">amanrai77@gmail.com</span>
+        </div>
+      </a>
+      <a class="contact-link" href="https://www.linkedin.com/in/aman-kumarb4881440" target="_blank">
+        <span class="contact-link-icon">in</span>
+        <div>
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-value">linkedin.com/in/aman-kumarb4881440</span>
+        </div>
+      </a>
+      <a class="contact-link" href="https://www.youtube.com/@UnfoldDataScience" target="_blank">
+        <span class="contact-link-icon">▶</span>
+        <div>
+          <span class="contact-link-label">YouTube</span>
+          <span class="contact-link-value">Unfold Data Science · 10M+ Views</span>
+        </div>
+      </a>
+      <a class="contact-link" href="tel:+447448407036">
+        <span class="contact-link-icon">☎</span>
+        <div>
+          <span class="contact-link-label">Phone (UK)</span>
+          <span class="contact-link-value">+44 7448 407036</span>
+        </div>
+      </a>
+      <a class="contact-link" href="tel:+919591878877">
+        <span class="contact-link-icon">☎</span>
+        <div>
+          <span class="contact-link-label">Phone (India)</span>
+          <span class="contact-link-value">+91 9591 878877</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">© 2026 Aman Kumar — All Rights Reserved</span>
+  <span class="footer-brand">Unfold Data Science</span>
+</footer>
+
+<script>
+  // Scroll reveal for experience items
+  const items = document.querySelectorAll('.exp-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 120);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  items.forEach(item => observer.observe(item));
+
+  // Smooth nav active state
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.style.color = link.getAttribute('href') === `#${entry.target.id}` 
+            ? 'var(--gold2)' : '';
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => navObserver.observe(s));
+</script>
+
+</body>
+</html>
